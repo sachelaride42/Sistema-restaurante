@@ -1,4 +1,5 @@
 <?php
+include'classeCliente';
 class Pedido{
     private $id;
     private $status;// ["Pedido realizado", "Em preparação", "Prato pronto", "Pedido finalizado"];
