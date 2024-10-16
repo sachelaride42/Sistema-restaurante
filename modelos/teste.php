@@ -1,7 +1,6 @@
 <?php
-include_once 'classeGerente.php';
-$g = new Gerente();
-$g->setNome("Lucas");
-echo $g->getNome() . " a0";
-echo "\n";
-echo "a";
+include_once 'classeFuncionario.php';
+include_once 'classeCargo.php';
+//$g = new Funcionario();
+//$g->setCargo(Cargo::gerente);
+//echo(''.$g->getCargo());
