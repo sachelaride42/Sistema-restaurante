@@ -1,11 +1,10 @@
 <?php
-include'classeCargo';
+
 class Funcionario{
     protected $id;
     protected $nome;
     protected $usuario;
     protected $senha;
-
     protected $cargo;
 
     public function getId(){
@@ -32,10 +31,9 @@ class Funcionario{
     public function setSenha(String $senha){
         $this->senha = $senha;
     }
-    public function serCargo(cargo $type){
+    public function serCargo(Cargo $type){
         $this->cargo = $type;
     }
-
     public function getCargo(){
         return $this->cargo
     }
