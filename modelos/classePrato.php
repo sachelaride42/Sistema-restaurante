@@ -26,4 +26,8 @@ class Prato{
     public function setDescricao($descricao){
         $this->descricao = $descricao;
     }
+    public function salvar(){
+        return true;
+    }
+
 }

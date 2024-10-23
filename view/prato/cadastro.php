@@ -1,9 +1,3 @@
-<?php
-
-class Cadastro
-{
-
-}?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +11,7 @@ class Cadastro
     <h2>Cadastro de Pratos</h2>
     <conteneir>
         <div class="row">
-            <form class="clo s12" action="pratoController.php" method="post">
+            <form class="clo s12" action="/prato/store" method="POST">
             <div class="row">
         <div class="input-field col s6">
           <input id="nome" type="text" class="validate">
@@ -41,12 +35,15 @@ class Cadastro
         </div>
             <input type="submit" class="btn"></input>
             </form>
-            
-
         </div>
+        <?php
+        session_start();
+        if (isset($_SESSION['message'])) {
+            echo '<p>' . htmlspecialchars($_SESSION['message']) . '</p>';
+            unset($_SESSION['message']); // Certifique-se de limpar a mensagem após mostrar
+        }
+        ?>
     </conteneir>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
