@@ -5,7 +5,7 @@ class Pedido{
     private $dataHora;
     private $cliente;
 
-    public function __construct(Cliente $cliente){
+    public function __construct($cliente){
         $this->status = "Pedido realizado";
         $this->dataHora = new DateTime();
         $this->cliente = $cliente;
