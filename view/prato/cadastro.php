@@ -34,10 +34,54 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 if (isset($_SESSION['message'])) {
     echo '<p>' . htmlspecialchars($_SESSION['message']) . '</p>';
-    unset($_SESSION['message']); // Certifique-se de limpar a mensagem após mostrar
+    unset($_SESSION['message']);
 }
 ?>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<?php
+    $files = get_included_files();
+    foreach($files as $file) {
+        if(str_contains($file, 'PratoController.php')){
+            $contem = true;
+        }
+    }
+    if(!$contem){
+        require_once realpath(__DIR__ . '/../../controller/PratoController.php');
+    }
+
+    $pc = new pratoController();
+    if($pc->listarPratos() != null && $pc->listarPratos()){
+?>
+<h2 class="row>">Lista de pratos cadastrados</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Descrição</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($pc->listarPratos() as $prato) {
+        ?>
+        <tr>
+            <td><?php echo $prato['nome']; ?></td>
+            <td><?php echo $prato['preco']; ?></td>
+            <td><?php echo $prato['descricao']; ?></td>
+            <td><a href="/prato/edit.php?id=<?php echo $prato['id']; ?>">Editar</a></td>
+            <td><a href="/prato/delete.php?id=<?php echo $prato['id']; ?>">Excluir</a></td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php }else{
+    echo "<h2>Nenhum prato cadastrado</h2>";
+}?>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

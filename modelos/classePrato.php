@@ -27,7 +27,35 @@ class Prato{
         $this->descricao = $descricao;
     }
     public function salvar(){
-        return true;
+        $dsn = "mysql:host=localhost;dbname=restaurantedb";
+        $username = 'root';
+        $password = 'admin';
+        try{
+            $db = new PDO($dsn, $username, $password);
+            $query = "INSERT INTO pratos (nome, preco, descricao) VALUES (:nome, :preco, :descricao)";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':nome', $this->nome);
+            $stmt->bindParam(':preco', $this->preco);
+            $stmt->bindParam(':descricao', $this->descricao);
+            return $stmt->execute();
+        }catch(PDOException $e){
+            echo "Erro: ao salvar" . $e->getMessage();
+            return false;
+        }
     }
 
+    public function listar(){
+        $dsn = "mysql:host=localhost;dbname=restaurantedb";
+        $username = 'root';
+        $password = 'admin';
+        try{
+            $db = new PDO($dsn, $username, $password);
+            $query = "SELECT * FROM pratos";
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            echo "Erro ao listar: " . $e->getMessage();
+        }
+    }
 }
