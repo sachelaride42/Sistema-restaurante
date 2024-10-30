@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Prato</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+<nav>
+    <div class="nav-wrapper indigo darken-1">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
 <h2 class="row">Cadastro de Pratos</h2>
 <form class="col s12" action="/prato/store" method="POST">
     <div class="row">
@@ -15,8 +25,9 @@
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <input id="preco" name="preco" type="text" class="validate" required>
+            <input id="preco" name="preco" type="number" step="0.01" class="validate" required>
             <label for="preco">Preço</label>
+            <span class="helper-text" data-error="Apenas numeros" data-success=""></span>
         </div>
     </div>
     <div class="row">
@@ -25,9 +36,11 @@
             <label for="descricao">Descrição</label>
         </div>
     </div>
-    <button type="submit" class="btn waves-effect waves-light">Cadastrar</button>
+    <button type="submit" class="btn waves-effect waves-light">Cadastrar
+    <i class="material-icons right">send</i>
+    </button>
 </form>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -82,6 +95,6 @@ if (isset($_SESSION['message'])) {
 }?>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
 </body>
 </html>
