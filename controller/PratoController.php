@@ -44,4 +44,16 @@ class pratoController
         return $prato->listar();
     }
 
+    public function deletarPrato(){
+        echo "Método de solicitação: " . $_SERVER['REQUEST_METHOD'] . "<br>";
+
+        if($_SERVER['REQUEST_METHOD'] === 'GET'){
+            $prato = new Prato();
+            $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $prato->deletar($id);
+            header('Location: /view/prato/cadastro.php');
+        }
+    }
+
+
 }

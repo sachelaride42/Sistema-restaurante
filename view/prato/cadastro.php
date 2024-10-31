@@ -84,8 +84,8 @@ if (isset($_SESSION['message'])) {
             <td><?php echo $prato['nome']; ?></td>
             <td><?php echo $prato['preco']; ?></td>
             <td><?php echo $prato['descricao']; ?></td>
-            <td><a href="/prato/edit.php?id=<?php echo $prato['id']; ?>">Editar</a></td>
-            <td><a href="/prato/delete.php?id=<?php echo $prato['id']; ?>">Excluir</a></td>
+            <td><a href="/prato/edit?id=<?php echo $prato['id']; ?>">Editar</a></td>
+            <td><a href="/prato/delete?id=<?php echo $prato['id']; ?>">Excluir</a></td>
         </tr>
         <?php } ?>
     </tbody>

@@ -11,12 +11,11 @@
     <nav>
         <div class="nav-wrapper indigo darken-1">
             <a href="#" class="brand-logo">Logo</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <ul id="nav-mobile" class="right hide-on-med">
                 <li><a href="\..\View\cadastro\telaCadastroFuncionario.php">Cadastro</a></li>
-            </ul>
-            <ul>
                 <li><a href="\..\View\pedido\cadastroPedido.php">Pedidos</a></li>
             </ul>
+
         </div>
     </nav>
 

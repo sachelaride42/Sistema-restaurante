@@ -58,4 +58,19 @@ class Prato{
             echo "Erro ao listar: " . $e->getMessage();
         }
     }
+
+    public function deletar($id){
+        $dsn = "mysql:host=localhost;dbname=restaurantedb";
+        $username = 'root';
+        $password = 'admin';
+        try{
+            $db = new PDO($dsn, $username, $password);
+            $query = "DELETE FROM pratos WHERE id = :id";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        }catch(PDOException $e){
+            echo "Erro ao deletar: " . $e->getMessage();
+        }
+    }
 }
