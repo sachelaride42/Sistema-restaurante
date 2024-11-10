@@ -4,11 +4,21 @@ class Pedido{
     private $status;// ["Pedido realizado", "Em preparação", "Prato pronto", "Pedido finalizado"];
     private $dataHora;
     private $cliente;
+    private $id_pratos;
+    private $quantidades;
+    private $valor_total;
 
-    public function __construct($cliente){
+
+
+    public function __construct($cliente, $id_pratos, $quantidades, $valor_total){
         $this->status = "Pedido realizado";
-        $this->dataHora = new DateTime();
+        $data = new DateTime();
+        $this->dataHora = $data->format('d-m-Y H:i:s');
         $this->cliente = $cliente;
+    }
+
+    private function calcularValorTotal(){
+
     }
 
     public function getId(){

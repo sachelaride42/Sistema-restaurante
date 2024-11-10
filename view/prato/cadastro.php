@@ -58,12 +58,15 @@ if (isset($_SESSION['message'])) {
         if(str_contains($file, 'PratoController.php')){
             $contem = true;
         }
+        else{
+            $contem = false;
+        }
     }
     if(!$contem){
         require_once realpath(__DIR__ . '/../../controller/PratoController.php');
     }
 
-    $pc = new pratoController();
+    $pc = new PratoController();
     if($pc->listarPratos() != null && $pc->listarPratos()){
 ?>
 <h2 class="row>">Lista de pratos cadastrados</h2>
@@ -78,8 +81,8 @@ if (isset($_SESSION['message'])) {
         </tr>
     </thead>
     <tbody>
-        <?php foreach($pc->listarPratos() as $prato) {
-        ?>
+        <?php foreach($pc->listarPratos() as $prato) {?>
+
         <tr>
             <td><?php echo $prato['nome']; ?></td>
             <td><?php echo $prato['preco']; ?></td>

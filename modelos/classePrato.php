@@ -59,6 +59,40 @@ class Prato{
         }
     }
 
+    public function getPratoById($id){
+        $dsn = "mysql:host=localhost;dbname=restaurantedb";
+        $username = 'root';
+        $password = 'admin';
+        try{
+            $db = new PDO($dsn, $username, $password);
+            $query = "SELECT * FROM pratos WHERE id = :id";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch();
+        }catch(PDOException $e){
+            echo "Erro ao listar: " . $e->getMessage();
+        }
+    }
+
+    public function atualizar($id, $nome, $preco, $descricao){
+        $dsn = "mysql:host=localhost;dbname=restaurantedb";
+        $username = 'root';
+        $password = 'admin';
+        try{
+            $db = new PDO($dsn, $username, $password);
+            $query = "UPDATE pratos SET nome = :nome, preco = :preco, descricao = :descricao where id = :id";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':preco', $preco);
+            $stmt->bindParam(':descricao', $descricao);
+            return $stmt->execute();
+        }catch(PDOException $e){
+            echo "Erro ao atualizar: " . $e->getMessage();
+        }
+    }
+
     public function deletar($id){
         $dsn = "mysql:host=localhost;dbname=restaurantedb";
         $username = 'root';

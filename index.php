@@ -11,18 +11,27 @@ $route = $parsedURL['path'];
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($route) {
-    case '/prato/create':
-        $controller = new pratoController();
+    case "/prato/show":
+        $controller = new PratoController();
         $controller->abrirTelaCadastro();
         break;
-    case '/prato/store':
-        $controller = new pratoController();
+    case '/prato/create':
+        $controller = new PratoController();
         $controller->cadastrarPrato();
         break;
     case '/prato/delete':
-        $controller = new pratoController();
+        $controller = new PratoController();
         $controller->deletarPrato();
         break;
+    case '/prato/edit':
+        $controller = new PratoController();
+        $controller->geraAtualizarPrato();
+    case '/prato/update':
+        $controller = new PratoController();
+        $controller->updatePrato();
+    case '/pedido/abrirPedido':
+        $controller = new PedidoController();
+        $controller->abrirTelaPedido();
     default:
         echo 'Página não encontrada';
         break;

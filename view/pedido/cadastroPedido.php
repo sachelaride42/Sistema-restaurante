@@ -16,48 +16,74 @@
             </ul>
         </div>
   </nav>
-  <h2>Cadastro de Pedidos</h2>
-  <div class="row">
+    <div class="row">
+    <h2 class="col s12">Cadastro de Pedidos</h2>
+
     <form class="col s12">
         <div class="input-field col s6">
-            <input id="cliente" type="text" class="validate">
+            <input id="cliente" type="text" name="cliente" class="validate">
             <label for="cliente">Nome do Cliente</label>
         </div>
-        <div class="input-field col s6">             
-            <select class="browser-default">
+        <div class="input-field col s6">
+            <select name="status" class="browser-default">
                 <option value="" disabled selected>Status do Pedido</option>
                 <option value="1" >Pedido realizado</option>
-                <option value="2"disabled selected>Em preparação</option>
-                <option value="3"disabled selected>Prato pronto</option>
-                <option value="4"disabled selected>Pedido finalizado</option>
+                <option value="2" disabled selected>Em preparação</option>
+                <option value="3" disabled selected>Prato pronto</option>
+                <option value="4" disabled selected>Pedido finalizado</option>
             </select>
         </div>
+        <?php
+        $files = get_included_files();
+        foreach($files as $file) {
+            if(str_contains($file, 'PratoController.php')){
+                $contem = true;
+            }
+            else{
+                $contem = false;
+            }
+        }
+        if(!$contem){
+            require_once realpath(__DIR__ . '/../../controller/PratoController.php');
+        }
+        $pc = new PratoController();
+        if($pc->listarPratos() != null && $pc->listarPratos()){
+            ?>
+        <h2 class="col s12">Lista de pratos</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Adicionar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($pc->listarPratos() as $prato) {?>
 
-        
-        <div class="row">  
-        <table class="col 12s">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+                <tr>
+                    <td><?php echo $prato['nome']; ?></td>
+                    <td><?php echo $prato['preco']; ?></td>
+                    <td><?php echo $prato['descricao']; ?></td>
+                    <td><input type="number" name="quantidade[]"></td>
+                    <td><label><input class="filled-in" type="checkbox" name="id_prato[]" value="<?php echo $prato['id'];?>"><span>Adicionar</span></label></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php }else{
+            echo "<h2>Nenhum prato cadastrado</h2>";
+        }?>
+
+        <br>
+        <div class="col s4 offset-s8">
+            <button type="submit" class="btn waves-effect waves-light">Gerar Pedido
+            <i class="material-icons right">send</i>
+            </button>
         </div>
-        <button type="submit" class="btn waves-effect waves-light">Gerar Pedido
-    <i class="material-icons right">send</i>
-    </button>
     </form>
-  </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
