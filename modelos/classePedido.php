@@ -10,25 +10,42 @@ class Pedido{
 
 
 
-    public function __construct($cliente, $id_pratos, $quantidades, $valor_total){
-        $this->status = "Pedido realizado";
-        $data = new DateTime();
-        $this->dataHora = $data->format('d-m-Y H:i:s');
-        $this->cliente = $cliente;
+    public function __construct(){
+        $this->dataHora = new DateTime();
     }
 
-    private function calcularValorTotal(){
+    public function setValorTotal($valor_total){
+        $this->valor_total = $valor_total;
+    }
 
+    public function getValorTotal(){
+        return $this->valor_total;
     }
 
     public function getId(){
         return $this->id;
     }
+    public function setId(int $id){
+        $this->id = $id;
+    }
+    public function getIdPratos(){
+        return $this->id_pratos;
+    }
+    public function setIdPratos($id_pratos){
+        $this->id_pratos = $id_pratos;
+    }
+    public function getQuantidades(){
+        return $this->quantidades;
+    }
+
+    public function setQuantidades($quantidades){
+        $this->quantidades = $quantidades;
+    }
 
     public function getStatus(){
         return $this->status;
     }
-    public function setStatus(String $status){
+    public function setStatus($status){
         $this->status = $status;
     }
 
@@ -38,6 +55,9 @@ class Pedido{
     
     public function getCliente(){
         return $this->cliente;
+    }
+    public function setCliente($cliente){
+        $this->cliente = $cliente;
     }
     
 }

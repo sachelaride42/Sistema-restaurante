@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require 'controller/PratoController.php';
+require 'controller/PedidoController.php';
 
 $route = $_SERVER['REQUEST_URI'];
 $parsedURL = parse_url($route);
@@ -26,12 +27,19 @@ switch ($route) {
     case '/prato/edit':
         $controller = new PratoController();
         $controller->geraAtualizarPrato();
+        break;
     case '/prato/update':
         $controller = new PratoController();
         $controller->updatePrato();
+        break;
     case '/pedido/abrirPedido':
         $controller = new PedidoController();
         $controller->abrirTelaPedido();
+        break;
+    case '/pedido/create':
+        $controller = new PedidoController();
+        $controller->cadastrarPedido();
+        break;
     default:
         echo 'Página não encontrada';
         break;

@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,14 +17,20 @@
         <div class="nav-wrapper indigo darken-1">
             <a href="#" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="\..\View\login\telaLogin.php">Retornar</a></li>
+                <li><a href="\..\view\login\telaLogin.php">Retornar</a></li>
             </ul>
         </div>
   </nav>
+    <?php
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $posta = $_POST;
+            echo '<p>' . "a". print_r($posta, true) . '</p>';
+        }
+    ?>
     <div class="row">
     <h2 class="col s12">Cadastro de Pedidos</h2>
 
-    <form class="col s12">
+    <form class="col s12" action="/pedido/create" method="POST">
         <div class="input-field col s6">
             <input id="cliente" type="text" name="cliente" class="validate">
             <label for="cliente">Nome do Cliente</label>
@@ -27,10 +38,10 @@
         <div class="input-field col s6">
             <select name="status" class="browser-default">
                 <option value="" disabled selected>Status do Pedido</option>
-                <option value="1" >Pedido realizado</option>
-                <option value="2" disabled selected>Em preparação</option>
-                <option value="3" disabled selected>Prato pronto</option>
-                <option value="4" disabled selected>Pedido finalizado</option>
+                <option value="Pedido realizado" >Pedido realizado</option>
+                <option value="Em preparação" disabled selected>Em preparação</option>
+                <option value="Prato pronto" disabled selected>Prato pronto</option>
+                <option value="Pedido finalizado" disabled selected>Pedido finalizado</option>
             </select>
         </div>
         <?php
@@ -67,7 +78,7 @@
                     <td><?php echo $prato['nome']; ?></td>
                     <td><?php echo $prato['preco']; ?></td>
                     <td><?php echo $prato['descricao']; ?></td>
-                    <td><input type="number" name="quantidade[]"></td>
+                    <td><input type="number" name="quantidade[<?php echo $prato['id'];?>]"></td>
                     <td><label><input class="filled-in" type="checkbox" name="id_prato[]" value="<?php echo $prato['id'];?>"><span>Adicionar</span></label></td>
                 </tr>
             <?php } ?>
