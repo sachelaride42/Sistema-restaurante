@@ -8,8 +8,6 @@ class Pedido{
     private $quantidades;
     private $valor_total;
 
-
-
     public function __construct(){
         $this->dataHora = new DateTime();
     }
@@ -58,6 +56,27 @@ class Pedido{
     }
     public function setCliente($cliente){
         $this->cliente = $cliente;
+    }
+
+    public function salvar($data){
+        $dsn = "mysql:host=localhost;dbname=restaurantedb";
+        $username = 'root';
+        $password = 'admin';
+        try{
+            $db = new PDO($dsn, $username, $password);
+            $query = "INSERT INTO pedidos (statuss, dataHora, cliente, id_pratos, quantidades, valor_total) VALUES (:statuss, :dataHora, :cliente, :id_pratos, :quantidades, :valor_total)";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':statuss', $this->status);
+            $stmt->bindParam(':dataHora', $data);
+            $stmt->bindParam(':cliente', $this->cliente);
+            $stmt->bindParam(':id_pratos', $this->id_pratos);
+            $stmt->bindParam(':quantidades', $this->quantidades);
+            $stmt->bindParam(':valor_total', $this->valor_total);
+            return $stmt->execute();
+        }catch(PDOException $e){
+            echo "Erro: ao salvar" . $e->getMessage();
+            return false;
+        }
     }
     
 }

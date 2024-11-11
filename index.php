@@ -3,8 +3,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require 'controller/PratoController.php';
-require 'controller/PedidoController.php';
+require_once 'modelos/classePedido.php';
+require_once 'controller/PratoController.php';
+require_once 'controller/PedidoController.php';
 
 $route = $_SERVER['REQUEST_URI'];
 $parsedURL = parse_url($route);
